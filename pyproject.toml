@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-redis = ["redis>=5.0"]
+redis = ["redis>=5.0.1"]
 dev = [
     "pytest>=8.0",
     "ruff>=0.6",
