@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "market-pulse-api"
+version = "0.1.0"
+description = "FastAPI service for OHLCV market data, technical indicators, rule-based alerts and WebSocket alert streaming."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Aria Esmaeilzadeh" }]
+requires-python = ">=3.11"
+keywords = ["fastapi", "market-data", "technical-analysis", "indicators", "websocket", "alerts"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Typing :: Typed",
+]
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=5.0"]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "httpx>=0.27",
+]
+
+[project.urls]
+Homepage = "https://github.com/ariaesm/market-pulse-api"
+Issues = "https://github.com/ariaesm/market-pulse-api/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/market_pulse"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "N", "C4", "PT"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["N802", "N806"]
